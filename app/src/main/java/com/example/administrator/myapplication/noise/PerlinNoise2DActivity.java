@@ -27,7 +27,7 @@ public class PerlinNoise2DActivity extends AppCompatActivity {
         initAllData();
     }
 
-    private static final int size = 512;
+    private static final int size = 1024;
     //    private Bitmap bmp;
     private int[] array;
 
@@ -43,10 +43,8 @@ public class PerlinNoise2DActivity extends AppCompatActivity {
             @Override
             public void handleMessage(Message msg) {
                 progress.setProgress(msg.what);
-
                 Bitmap bmp = Bitmap.createBitmap(array, size, size, Bitmap.Config.ARGB_8888);
                 iv.setImageBitmap(bmp);
-
 
             }
         };
@@ -64,12 +62,13 @@ public class PerlinNoise2DActivity extends AppCompatActivity {
                     for (int height = 0; height < size; height++) {
                         float noiseValue = 0;
                         noiseValue += n.interpolatedNoise(width * 0.01f, height * 0.01f);
-                        noiseValue += n.interpolatedNoise(width * 0.02f, height * 0.02f);
-                        noiseValue += n.interpolatedNoise(width * 0.04f, height * 0.04f);
-                        noiseValue += n.interpolatedNoise(width * 0.08f, height * 0.08f);
 
-                        float roundedValue=noiseValue/4;
-                        array[height + width * size] = Color.rgb((int) (255*roundedValue),0,0);
+//                        float roundedValue=noiseValue/4;
+                        array[height + width * size] = Color.rgb((int) (250 * noiseValue), 0, 0);
+//                        array[height + width * size] = Color.rgb((int) (127.5f*(noiseValue+1)),0,0);
+//                        array[height + width * size] = (int) (Integer.MAX_VALUE * (noiseValue+1));
+
+
                     }
                 }
             }
